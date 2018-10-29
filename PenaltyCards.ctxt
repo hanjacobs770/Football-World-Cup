@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=PenaltyCards()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ penaltyCards\r\n
+comment1.params=
+comment1.target=int\ getRedCards()
+comment2.params=
+comment2.target=int\ getYellowCards()
+comment3.params=
+comment3.target=void\ redCards()
+comment4.params=
+comment4.target=void\ yellowCards()
+comment4.text=\r\n\ This\ method\ randomly\ genrates\ penalties\ each\ game\ \r\n
+comment5.params=
+comment5.target=void\ setToZero()
+numComments=6

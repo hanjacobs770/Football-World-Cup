@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Sorter()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Menu\r\n
+comment1.params=teamNew
+comment1.target=void\ updateArray(java.util.ArrayList)
+comment1.text=\r\n\ This\ passes\ the\ teams\ array\ list\ from\ GameCode\ to\ Sorter\ for\ sorting\r\n
+comment2.params=
+comment2.target=void\ selectFinalTeams1()
+comment3.params=
+comment3.target=void\ selectFinalTeams2()
+comment4.params=
+comment4.target=int\ getIndexOfTeam1()
+comment5.params=
+comment5.target=int\ getIndexOfTeam2()
+numComments=6

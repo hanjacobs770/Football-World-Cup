@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Player()
+comment0.text=\r\n\ Default\ Constructor\ for\ objects\ of\ class\ Player.\r\n
+comment1.params=playerName
+comment1.target=Player(java.lang.String)
+comment1.text=\r\n\ Constructor\ which\ allows\ user\ to\ choose\ their\ name.\r\n
+comment2.params=playergoals
+comment2.target=int\ assignGoals(int)
+comment3.params=
+comment3.target=int\ getGoals()
+comment4.params=
+comment4.target=void\ displayPlayerScore()
+comment5.params=
+comment5.target=java.lang.String\ getName()
+comment6.params=
+comment6.target=void\ printPlayerName()
+comment7.params=
+comment7.target=void\ setName()
+numComments=8

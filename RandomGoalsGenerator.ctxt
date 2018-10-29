@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=
+comment0.target=RandomGoalsGenerator()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ RandomGoalsGenerator\r\n\ I\ found\ the\ Math.Random\ method\ through\ Google.\r\n
+comment1.params=rankingdifference
+comment1.target=int\ generateGoals(int)
+numComments=2

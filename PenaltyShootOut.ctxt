@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=PenaltyShootOut()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ RandomGoalsGenerator\r\n\ I\ found\ the\ Math.Random\ method\ through\ Google.\r\n
+comment1.params=
+comment1.target=void\ firstRoundShooutout()
+comment2.params=
+comment2.target=void\ lastRoundShooutout()
+comment3.params=
+comment3.target=int\ getpenalyGoals()
+comment4.params=
+comment4.target=void\ setToZero()
+numComments=5

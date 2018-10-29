@@ -1,0 +1,405 @@
+
+/**
+ * The Game class manages the playing of the game.
+ * 
+ * @author (Han Jacobs) 
+ * @version (Semester 1 2018)
+ */
+
+import java.util.Scanner;
+public class GameCode
+{
+    private Player Player1;
+    private RandomNumber Randomset;
+    public int randomnumber1;
+    public int randomstart1;
+    public int abandomgameindicator1;
+    public int abandongamecheck1;
+    private int numberguess;
+    private int attempts;
+    private int rangemax;
+    private int rangemin;
+    private int proximityplayer;
+    private int proximitycomp;
+    private int rounds;
+    private int playerwins1;
+    private int computerwins1;
+    private int scoreplayer1;
+    private int scorecomp1;
+    private boolean computerwentfirst;
+
+    public GameCode()
+    {
+        Player1 = new Player();
+        Randomset = new RandomNumber();   
+        randomnumber1 = Randomset.getrandomnumber();
+        randomstart1 = Randomset.getrandomstart();
+        abandomgameindicator1 = Randomset.getabandomgameindicator();
+        abandongamecheck1 = Randomset.getabandongamecheck();      
+        numberguess = 0;
+        attempts = 0;
+        rangemax = 100;
+        rangemin = 1;
+        proximityplayer = 0;
+        proximitycomp = 0;
+        rounds = 0;
+        playerwins1 = Player1.getPlayerwins();
+        computerwins1 = Player1.getcomputerwins();
+        scoreplayer1 = 0;
+        scorecomp1 = 0;
+        computerwentfirst = false;
+    }
+
+    public  void  playgame()
+    {
+
+        Player1.setname();
+
+        if(randomstart1 == 1)
+
+        //round 1.
+        {
+            computerwentfirst = false;
+            Scanner console = new Scanner(System.in);
+            System.out.println("Ok, you start. Please have a guess for the random number between 0 and 100");
+
+            numberguess = console.nextInt();
+
+            if(numberguess > 100 || numberguess < 1)
+            {
+                System.out.println("The number you entered is invalid please try again");
+                attempts += 1;
+                //loop;
+            }
+            //else
+            //             if ((numberguess != int)== true)
+            //             {
+            //                 System.out.print("Please only enter numeric data");
+            //                 attempts += 1;
+            //                 loop;
+            //             }
+            else
+            {
+                if (numberguess == 999)
+                {
+                    System.out.println("You have abandoned the round, bad luck");
+                    //break;
+
+                    endround();
+                }
+                else
+                {
+                    if (numberguess!= randomnumber1 && numberguess <= 100 && numberguess >= 1) 
+
+                        if(numberguess > randomnumber1) 
+                        {
+                            System.out.println("The number you entered was higher than the secret number now it's the Computer's turn");
+                            rangemax = numberguess;
+                            attempts += 1;
+                            //break;
+                            proximityplayer = numberguess - randomnumber1;
+                            if (proximityplayer < 0 && proximitycomp > -10)
+                            {
+                                proximityplayer = proximityplayer * -1;
+                            }
+                        }
+                        else 
+                        { 
+                            System.out.println("The number you entered was lower than the secret number now it's the Computer's turn");
+                            rangemin = numberguess;
+                            attempts += 1;
+                            // break;
+
+                            proximityplayer = numberguess - randomnumber1;
+                            if (proximityplayer < 0 && proximitycomp > -10)
+                            {
+                                proximityplayer = proximityplayer * -1;
+                            }
+
+                        }
+                    else
+                    {
+                        if (numberguess == randomnumber1) 
+
+                            System.out.println("Wow great job you won the round!");
+                        Player1.incrementplayerwins();
+                        playerwins1 = Player1.getPlayerwins();
+
+                        attempts += 1;
+                        scoreallocatePlayer1wins(attempts);
+                    }
+
+                }
+            }
+
+            if (computerwentfirst = true) 
+            {
+                endround();
+            }
+
+        }
+        // the computer has the first turn.
+        else 
+        {
+            System.out.println("Ok, the Compuer will have the first turn");
+            computerwentfirst = true;
+
+            if(abandongamecheck1 == abandomgameindicator1) 
+            {
+                System.out.println("The computer has abandoned the game");
+                //break;
+
+                endround();
+                // break;
+
+            }
+            //randomguess = random.int(1, 100);
+            else
+            {
+                if (numberguess!= randomnumber1)
+
+                    if(numberguess > randomnumber1) 
+                    {
+
+                        rangemax = numberguess;
+                        attempts +=1;
+                        //  break;
+                        proximitycomp = numberguess - randomnumber1;
+                        if (proximitycomp < 0 && proximitycomp > -10)
+                        {
+                            proximitycomp = proximitycomp * -1;
+                        }
+                    }
+                    else 
+                    {
+                        rangemin = numberguess;
+                        attempts +=1;
+                        //   break;
+
+                        proximitycomp = numberguess - randomnumber1;
+                        if (proximitycomp < 0 && proximitycomp > -10)
+                        {
+                            proximitycomp = proximitycomp * -1;
+                        }
+                    }
+                else
+                {
+                    if (numberguess == randomnumber1) 
+                    {
+                        System.out.println("The computer has won the round");
+                        Player1.incrementcomputerwins();
+                        computerwins1 = Player1.getcomputerwins();
+                        attempts += 1;
+                        scoreallocateCompwins(attempts);
+
+                    }
+
+                }
+            }
+
+            if (computerwentfirst = false) 
+            {
+                endround();
+                // break;
+            }
+        }
+
+        //The case where neither player wins a round outright
+        if (playerwins1 == 0 && computerwins1 == 0)
+        {
+            if ( proximityplayer < 10 && proximityplayer >= 1)
+            {
+                Playerscorenowinner(proximityplayer);
+            }
+
+            if ( proximitycomp < 10 && proximitycomp >= 1)
+            {
+                Compscorenowinner(proximitycomp);
+            }
+        }
+
+        //The test to see if the game has been won.
+        //         if (rounds == 4)
+        //         {
+        //             if (scoreplayer1 > scorecomp1)
+        //             {
+        //                 System.out.println("Congratualtions you have won the game");
+        //                 //stop;
+        // 
+        //             }
+        //             else 
+        //             {
+        //                 if(scoreplayer1 < scorecomp1)
+        //                 {
+        // 
+        //                     System.out.println("The Computer has won the game, bad luck");
+        //                     //stop;
+        //                 }
+        //                 System.out.println("The game is tied");
+        //                 //stop;
+        //             }
+        //         }
+        //         else
+        //         {
+        //             // loop;
+        //         }
+
+    }
+
+    public void Playerscorenowinner(int proximityplayer)
+    {
+        switch (scoreplayer1)
+        {
+            case  1: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 2: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 3: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 4: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 5: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 6: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;  
+            case 7: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 8: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            case 9: scoreplayer1 = scoreplayer1 + (10 - proximityplayer); 
+            break;
+            default: scoreplayer1 = 0;
+        }
+        Player1.setscoreplayer(scoreplayer1);
+    }
+
+    public void Compscorenowinner(int proximitycomp)
+    {
+        switch (scorecomp1)
+        {
+            case 1: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case 2: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case 3: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case  4: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case 5: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case 6: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;  
+            case 7: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case 8: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;
+            case 9: scorecomp1 = scorecomp1 + (10 - proximitycomp); 
+            break;         
+            default: scorecomp1 = 0;
+        }
+        Player1.setscorecomp(scorecomp1);
+    }
+
+    public void scoreallocatePlayer1wins( int attempts)
+    {
+        switch (scoreplayer1)
+        {
+            case 1: scoreplayer1 = scoreplayer1 + 20; 
+            break;
+            case 2: scoreplayer1 = scoreplayer1 + 15; 
+            break;
+            case 3: scoreplayer1 = scoreplayer1 + 11; 
+            break;
+            case 4: scoreplayer1 = scoreplayer1 + 8; 
+            break;
+            case 5: scoreplayer1 = scoreplayer1 + 6; 
+            break;
+            case 6: scoreplayer1 = scoreplayer1 + 5; 
+            break;
+            default: scoreplayer1 = 0;
+
+        }
+        Player1.setscoreplayer(scoreplayer1);
+    }
+
+    public void scoreallocateCompwins( int attempts)
+    {        
+        switch (scorecomp1)
+        {
+            case 1: scorecomp1 = scorecomp1 + 20; 
+            break;
+            case 2: scorecomp1 = scorecomp1 + 15; 
+            break;
+            case 3: scorecomp1 = scorecomp1 + 11; 
+            break;
+            case 4: scorecomp1 = scorecomp1 + 8; 
+            break;
+            case 5: scorecomp1 = scorecomp1 + 6; 
+            break;
+            case 6: scorecomp1 = scorecomp1 + 5; 
+            break; 
+            default: scorecomp1 = 0;
+        }
+        Player1.setscorecomp(scorecomp1);
+    }
+
+    public void getPlayername()
+
+    {
+        Player1.getPlayername();
+    }
+
+    public int getattempts()
+    {
+        return attempts;
+
+    }
+
+    public int GetCompScore()
+    {
+        return scorecomp1;
+
+    }
+
+    public int GetPlayerscore()
+    {
+        return scoreplayer1;
+
+    }
+
+    public void endround()
+    {
+        rounds += 1;
+        if (rounds == 4)
+        {
+            System.out.println("Well thanks for playing the game is over");
+            System.out.println("Your scored " + scoreplayer1 + "And the computer scored " + scorecomp1);
+            if(Math.max(scoreplayer1, scorecomp1) == scoreplayer1)
+            {
+                System.out.println("So the winner is: " + Player1.getName() );
+                System.out.println("Please play again soon!" );
+            }
+            else 
+            if (Math.max(scoreplayer1, scorecomp1) == scorecomp1)
+            {
+                System.out.println("So the winner is: the computer");
+                System.out.println("Please play again soon!" );
+            }
+            else
+            {
+                System.out.println("The game was tied!" );
+                System.out.println("Please play again soon!" );
+            }
+            // break;
+        }
+
+        else
+        {
+            RandomNumber.newnumberset();
+            System.out.println("Round " + rounds + "is over");
+            System.out.println("Your score is " + scoreplayer1 + "The computer's score is " + scorecomp1);
+            System.out.println("Now let's play the next round!");
+        }
+    }
+
+}
